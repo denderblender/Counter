@@ -11,9 +11,11 @@ public class Counter : MonoBehaviour
     private int _count;
     private float _time;
 
-    public int Count => _count;
-
     public event Action CountChanged;
+
+    private Coroutine _countTime;
+
+    public int Count => _count;
 
     private void OnEnable()
     {
@@ -38,29 +40,28 @@ public class Counter : MonoBehaviour
 
         if (_isRunning == true)
         {
-            StartCoroutine(nameof(CountTime));
+            _countTime = StartCoroutine(CountTime(_delay));
         }
         else
         {
-            StopCoroutine(nameof(CountTime));
+            if (_countTime != null)
+            {
+                StopCoroutine(_countTime);
+            }
         }
     }
 
-    private IEnumerator CountTime()
+    private IEnumerator CountTime(float delay)
     {
-        while (true)
+        var wait = new WaitForSeconds(delay);
+
+        while (enabled)
         {
-            if (_time >= _delay)
-            {
-                _count++;
-                _time = 0.0f;
+            yield return wait;
 
-                CountChanged?.Invoke();
-            }
+            _count++;
 
-            _time += Time.deltaTime;
-
-            yield return null;
+            CountChanged?.Invoke();
         }
     }
 }

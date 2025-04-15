@@ -9,12 +9,12 @@ public class CounterView : MonoBehaviour
 
     private void OnEnable()
     {
-        _counter.CountChanged += Method;
+        _counter.CountChanged += ChangeText;
     }
 
     private void OnDisable()
     {
-        _counter.CountChanged -= Method;
+        _counter.CountChanged -= ChangeText;
     }
 
     private void Awake()
@@ -22,7 +22,7 @@ public class CounterView : MonoBehaviour
         _text = GetComponent<TextMeshProUGUI>();
     }
 
-    private void Method()
+    private void ChangeText()
     {
         _text.text = _counter.Count.ToString();
     }

@@ -270,7 +270,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3ab89a01654f2f74e847b7bba4ebf3f6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _delay: 0.5
+  _delay: 1
   _inputReader: {fileID: 1202786297}
 --- !u!114 &13200160
 MonoBehaviour:
