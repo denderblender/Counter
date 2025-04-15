@@ -4,12 +4,12 @@ using UnityEngine;
 
 public class Counter : MonoBehaviour
 {
-    [SerializeField] private float _delay;
+    private const float Delay = 0.5f;
+
     [SerializeField] private InputReader _inputReader;
 
     private bool _isRunning;
     private int _count;
-    private float _time;
 
     public event Action CountChanged;
 
@@ -31,7 +31,6 @@ public class Counter : MonoBehaviour
     {
         _isRunning = false;
         _count = 0;
-        _time = 0;
     }
 
     private void Switch()
@@ -40,7 +39,7 @@ public class Counter : MonoBehaviour
 
         if (_isRunning == true)
         {
-            _countTime = StartCoroutine(CountTime(_delay));
+            _countTime = StartCoroutine(CountTime(Delay));
         }
         else
         {
